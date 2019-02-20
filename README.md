@@ -13,7 +13,7 @@
 ## 2. 控件演示
 - 使用 default.css 样式
 
-![](http://ww1.sinaimg.cn/large/cca5a724ly1g0cwmiaps9g20gg0eq79m.gif)
+![](http://ww1.sinaimg.cn/large/cca5a724ly1g0cwynhn4jg20gg0eq43d.gif)
 
 - 使用 metro.css 样式
 
