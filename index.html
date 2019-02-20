@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <!-- 引入 ECharts 文件 -->
     <link rel="stylesheet" href="./Openlayer/ol.css" type="text/css">
-    <link rel="stylesheet" href="./ol-infowindow/style.css" type="text/css">
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" href="./ol-infowindow/metro.css" type="text/css">
     <script src="./Openlayer/ol.js"></script>
-    <script src="./ol-infowindow/main.js"></script>
+    <script src="./ol-infowindow/ol-infowindow.js"></script>
 
     <style>
         #map {
@@ -55,25 +54,22 @@
             title: {
                 show: true,
                 text: "标题",
-                textSize: "15px",
-                textColor: "#000",
-                backgroundColor: "#ddf1ff",
-                textAlign: "left"
+                textSize: "13px",
             },
-            width: "300px",
+            width: "250px",
             hideBefore: true,
             closeBtn: true,
             content: [{
                     name: "设备编码",
                     value: "1234564789",
-                    nameColor: "#222222",
+                    nameColor: "#666666",
                     valueColor: "#222222",
                     divider: false
                 }, {
                     name: "运行状态",
-                    value: 1 == "1" ? "运行" : "停止",
+                    value: "运行",
                     nameColor: "#222222",
-                    valueColor: 1 == "1" ? "#00aa00" : "#ff0000",
+                    valueColor: "#00aa00",
                     divider: false
                 },
                 {

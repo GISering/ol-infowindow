@@ -1,18 +1,17 @@
 .ol-popup {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.9);
     -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
     filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
     /* padding: 5px; */
     border-radius: 6px;
     /* border: 1px solid rgb(255, 255, 255); */
     bottom: 0px;
-    left: 0;
+    left: 0px;
     min-width: 200px;
     text-align: left;
     z-index: 999;
-    border: solid 1px #108ee9;
-    box-shadow: 2px 2px 8px rgba(0,0,0,.3);
+
 }
 
 .ol-popup:after,
@@ -28,7 +27,7 @@
 }
 
 .ol-popup:after {
-    border-top-color: rgba(255, 255, 255, 0.85);
+    border-top-color: rgba(255, 255, 255, 0.9);
     border-width: 10px;
     left: 50%;
     margin-left: -10px;
@@ -47,79 +46,88 @@
     margin-top: 3px; */
     font-size: 12px;
     font-weight: bold;
+    padding: 7px 10px 7px 10px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    background-color: #ddf1ff;
-    color: #000;
-    line-height: normal;
+    background-color: #108ee9;
+    text-align: center;
+    color: #fff
 }
 
 .info-window-close {
-    color: #1791ea;
+    /* still bad on picking color */
+    background: #cccccc;
+    color: white;
+    /* make a round button */
+    border-radius: 12px;
+    /* center text */
     line-height: 16px;
     text-align: center;
     height: 16px;
     width: 16px;
+    font-size: 12px;
+    padding: 1px;
     cursor: pointer;
-    top: 10px;
-    right: 13px;
+    top: -8px;
+    right: -8px;
     position: absolute;
-    pointer-events: auto;
+    pointer-events:auto;
 
 }
 
 
 .info-window-close::before {
-    content: "\2715";
-    font-size: 1.5rem;
+    content: "\2716";
+
 }
 
 .info-window-close:hover {
-    background: none;
+    background: gray;
 }
 
- /* by ice modify 2019.1.9*/
-/* .close::before {
-    content: "\2715";
+
+.info-window-close::before {
+    content: "\2716";
+
 }
-.close:hover {
-    background: none;
-} */
+
+.info-window-close:hover {
+    background: gray;
+}
 
 
 
 .info-window-content {
-    padding: 10px 20px;
+    padding: 7px 14px;
     overflow: auto;
 }
 
 .info-window-row-info {
     border-bottom: 0.5px solid #cccccc;
     padding: 3px;
-    color: #222222;
     width: auto;
     font-size: 12px
 }
 
 .info-window-key{
     float: left;
-    color: #111111;
+    color: #222222;
     width: auto;
     font-size: 13px;
     font-weight: bold;
     width: 90px;
     line-height: normal;
+
 }
 .info-window-list{
     border-bottom: 1px solid #cccccc;
     margin-bottom: 10px;
 }
 .info-window-value{
-    color: #555555;
+    color: #777777;
     text-align: left;
-    font-size: 13px;
+    font-size: 12px;
     line-height: normal;
-
 }
 
 .info-window-left {
@@ -132,26 +140,23 @@
 
 .info-window-info-button {
     font-size: 12px;
+    color: rgb(38, 131, 245);
     font-weight: bold;
     cursor: pointer;
     margin: 10px;
-    background: #367ac7;
-    width: 42%;
-    color: #Fff;
-    text-align: center;
-    padding: 8px 0;
-    border-radius: 5px;
+   
+
+
 }
-.info-window-info-button:hover{
-    background: #0e509a;
-}
+
 .info-window-full.info-window-info-button {
-    width: 92%;
+    float: right;
 }
+
 .info-window-info-button:before {
     color: rgb(38, 131, 245);
 }
 
 .info-window-info-button:hover {
-    color: #fff;
+    color: rgb(9, 74, 153);
 }

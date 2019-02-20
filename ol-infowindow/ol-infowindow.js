@@ -1,6 +1,6 @@
 ol.Map.prototype.beforeOverlay = null;
-ol.Map.prototype.addInfoWindow = function (attrs) {
-    var attrs = arguments[0] || {
+ol.Map.prototype.addInfoWindow = function (options) {
+    var options = arguments[0] || {
         title: "未知",
         content: [{
             "name": "未知",
@@ -22,55 +22,32 @@ ol.Map.prototype.addInfoWindow = function (attrs) {
 
     //整个窗体
     winElement.className = "ol-popup";
-    winElement.style.width = attrs.width;
-    /*by ice add */
+    winElement.style.width = options.width;
     var style=document.createElement('style');
     document.head.appendChild(style);
     var sheet = style.sheet;
-    style.innerHTML=".ol-popup{margin-left:-" + (parseFloat(attrs.width)/2) + "px}";
-    //winElement.style.marginLeft = Math.abs(attrs.width/2);
-    //使下面的三角居中
-    /*var style = document.createElement("style");
-    document.head.appendChild(style);
-    var sheet = style.sheet;
-    sheet.addRule('.ol-popup:before','left: '+ (attrs.width/2-5));
-    sheet.addRule('.ol-popup:after','left: '+ (attrs.width/2-5));
-    winElement.style.left = -(attrs.width/2-5);*/
-
-  /*  var style=document.createElement('style');
-    style.innerHTML=".ol-popup:before{left:" + (attrs.width/2-5)+ "px}";
-    style.innerHTML=".ol-popup:after{left:" + (attrs.width/2-5)+ "px}";
-    winElement.style.left = -(attrs.width/2-5) + "px";
-
-    document.head.appendChild(style);*/
+    style.innerHTML=".ol-popup{margin-left:-" + (parseFloat(options.width)/2) + "px}";
+   
 
     //标题
-    if(attrs.title.show){
+    if(options.title.show){
         titleElement.className = 'info-window-title';
-        titleElement.innerText = attrs.title.text;
-        if(attrs.title.textColor){
-            titleElement.style.color = attrs.title.textColor;
+        titleElement.innerText = options.title.text;
+        if(options.title.textColor){
+            titleElement.style.color = options.title.textColor;
         }
-        if(attrs.title.textSize){
-            titleElement.style.fontSize = attrs.title.textSize;
+        if(options.title.textSize){
+            titleElement.style.fontSize = options.title.textSize;
         }
-        if(attrs.title.backgroundColor){
-            titleElement.style.backgroundColor = attrs.title.backgroundColor;
+        if(options.title.backgroundColor){
+            titleElement.style.backgroundColor = options.title.backgroundColor;
         }
-        if(attrs.title.textAlign){
-            titleElement.style.textAlign = attrs.title.textAlign;
+        if(options.title.textAlign){
+            titleElement.style.textAlign = options.title.textAlign;
         }
-        titleElement.style.padding = '10px';
-        /* by ice modify 2019.1.9*/
-        titleElement.style.paddingTop = '7px';
-        titleElement.style.paddingBottom = '7px';
-        titleElement.style.border = 'solid 1px #fff';
-        titleElement.style.borderBottom = 'solid 1px #b6d9f8';
-        // titleElement.style.paddingBottom = '10px';  
-
     }
     //内容
-    var content = attrs.content;
+    var content = options.content;
     contentElement.className = "info-window-content";
     for (var i = 0, l = content.length; i < l; i++) {
         var rowEle = document.createElement("div");
@@ -112,27 +89,27 @@ ol.Map.prototype.addInfoWindow = function (attrs) {
 
     //按钮
     clearElement.style.clear = 'both';
-    if(attrs.button.show){
+    if(options.button.show){
     
-        if(attrs.button.fullButton){
+        if(options.button.fullButton){
             fullBtn.className = "info-window-full info-window-info-button"  //TODO-添加一个按钮样式
-            fullBtn.innerText = attrs.button.fullButton.text;
-            fullBtn.addEventListener('click', attrs.button.fullButton.callBack);
+            fullBtn.innerText = options.button.fullButton.text;
+            fullBtn.addEventListener('click', options.button.fullButton.callBack);
             buttonContainerElement.appendChild(fullBtn);
         }
 
-        if(attrs.button.leftButton){
+        if(options.button.leftButton){
             leftBtn.className = "info-window-left info-window-info-button"; //TODO-添加左侧按钮样式
-            leftBtn.innerText = attrs.button.leftButton.text;
-            leftBtn.addEventListener('click', attrs.button.leftButton.callBack);
+            leftBtn.innerText = options.button.leftButton.text;
+            leftBtn.addEventListener('click', options.button.leftButton.callBack);
             buttonContainerElement.appendChild(leftBtn);
 
         }
 
-        if(attrs.button.rightButton){
+        if(options.button.rightButton){
             rightBtn.className = "info-window-right info-window-info-button"; //TODO-添加右侧按钮样式
-            rightBtn.innerText = attrs.button.rightButton.text;
-            rightBtn.addEventListener('click', attrs.button.rightButton.callBack);
+            rightBtn.innerText = options.button.rightButton.text;
+            rightBtn.addEventListener('click', options.button.rightButton.callBack);
             buttonContainerElement.appendChild(rightBtn);
 
         }
@@ -141,7 +118,7 @@ ol.Map.prototype.addInfoWindow = function (attrs) {
     }
 
 
-    if (attrs.closeBtn){
+    if (options.closeBtn){
         closeElement.className = "info-window-close";
         winElement.appendChild(closeElement);
     }
@@ -164,7 +141,7 @@ ol.Map.prototype.addInfoWindow = function (attrs) {
         offset: [0, -10],
         autoPan: true
     });
-    if(attrs.hideBefore){
+    if(options.hideBefore){
         if(that.beforeOverlay){
             that.removeOverlay(that.beforeOverlay);
         }
@@ -173,13 +150,13 @@ ol.Map.prototype.addInfoWindow = function (attrs) {
     }
     this.addOverlay(overlay);
     that.beforeOverlay = overlay;
-    overlay.setPosition(attrs.position)
+    overlay.setPosition(options.position)
 
     return overlay;
 }
 
-ol.Map.prototype.addInfoListWindow = function (attrs) {
-    var attrs = arguments[0] || {
+ol.Map.prototype.addInfoListWindow = function (options) {
+    var options = arguments[0] || {
         title: "未知",
         content: [{
             "name": "未知",
@@ -201,57 +178,35 @@ ol.Map.prototype.addInfoListWindow = function (attrs) {
 
     //整个窗体
     winElement.className = "ol-popup";
-    winElement.style.width = attrs.width;
-    /*by ice add */
+    winElement.style.width = options.width;
     var style=document.createElement('style');
     document.head.appendChild(style);
     var sheet = style.sheet;
-    style.innerHTML=".ol-popup{margin-left:-" + (parseFloat(attrs.width)/2) + "px}";
-    //winElement.style.marginLeft = Math.abs(attrs.width/2);
-    //使下面的三角居中
-    /*var style = document.createElement("style");
-    document.head.appendChild(style);
-    var sheet = style.sheet;
-    sheet.addRule('.ol-popup:before','left: '+ (attrs.width/2-5));
-    sheet.addRule('.ol-popup:after','left: '+ (attrs.width/2-5));
-    winElement.style.left = -(attrs.width/2-5);*/
+    style.innerHTML=".ol-popup{margin-left:-" + (parseFloat(options.width)/2) + "px}";
 
-    /*  var style=document.createElement('style');
-      style.innerHTML=".ol-popup:before{left:" + (attrs.width/2-5)+ "px}";
-      style.innerHTML=".ol-popup:after{left:" + (attrs.width/2-5)+ "px}";
-      winElement.style.left = -(attrs.width/2-5) + "px";
-
-      document.head.appendChild(style);*/
 
     //标题
-    if(attrs.title.show){
+    if(options.title.show){
         titleElement.className = 'info-window-title';
-        titleElement.innerText = attrs.title.text;
-        if(attrs.title.textColor){
-            titleElement.style.color = attrs.title.textColor;
+        titleElement.innerText = options.title.text;
+        if(options.title.textColor){
+            titleElement.style.color = options.title.textColor;
         }
-        if(attrs.title.textSize){
-            titleElement.style.fontSize = attrs.title.textSize;
+        if(options.title.textSize){
+            titleElement.style.fontSize = options.title.textSize;
         }
-        if(attrs.title.backgroundColor){
-            titleElement.style.backgroundColor = attrs.title.backgroundColor;
+        if(options.title.backgroundColor){
+            titleElement.style.backgroundColor = options.title.backgroundColor;
         }
-        if(attrs.title.textAlign){
-            titleElement.style.textAlign = attrs.title.textAlign;
+        if(options.title.textAlign){
+            titleElement.style.textAlign = options.title.textAlign;
         }
-        titleElement.style.padding = '10px';
-        /* by ice modify 2019.1.9*/
-        titleElement.style.paddingTop = '7px';
-        titleElement.style.paddingBottom = '7px';
-        titleElement.style.border = 'solid 1px #fff';
-        titleElement.style.borderBottom = 'solid 1px #b6d9f8';
-        // titleElement.style.paddingBottom = '10px';
 
     }
     //内容
-    var content = attrs.content;
+    var content = options.content;
     contentElement.className = "info-window-content";
-    contentElement.style.height = attrs.height;
+    contentElement.style.height = options.height;
     for (var i = 0, l = content.length; i < l; i++) {
         var listEle = document.createElement("div");
         listEle.className = "info-window-list"
@@ -298,27 +253,27 @@ ol.Map.prototype.addInfoListWindow = function (attrs) {
 
     //按钮
     clearElement.style.clear = 'both';
-    if(attrs.button.show){
+    if(options.button.show){
 
-        if(attrs.button.fullButton){
+        if(options.button.fullButton){
             fullBtn.className = "info-window-full info-window-info-button"  //TODO-添加一个按钮样式
-            fullBtn.innerText = attrs.button.fullButton.text;
-            fullBtn.addEventListener('click', attrs.button.fullButton.fullCallBack);
+            fullBtn.innerText = options.button.fullButton.text;
+            fullBtn.addEventListener('click', options.button.fullButton.fullCallBack);
             buttonContainerElement.appendChild(fullBtn);
         }
 
-        if(attrs.button.leftButton){
+        if(options.button.leftButton){
             leftBtn.className = "info-window-left info-window-info-button"; //TODO-添加左侧按钮样式
-            leftBtn.innerText = attrs.button.leftButton.text;
-            leftBtn.addEventListener('click', attrs.button.leftButton.leftCallBack);
+            leftBtn.innerText = options.button.leftButton.text;
+            leftBtn.addEventListener('click', options.button.leftButton.leftCallBack);
             buttonContainerElement.appendChild(fullBtn);
 
         }
 
-        if(attrs.button.rightButton){
+        if(options.button.rightButton){
             rightBtn.className = "info-window-right info-window-info-button"; //TODO-添加右侧按钮样式
-            rightBtn.innerText = attrs.button.rightButton.text;
-            rightBtn.addEventListener('click', attrs.button.rightButton.rightCallBack);
+            rightBtn.innerText = options.button.rightButton.text;
+            rightBtn.addEventListener('click', options.button.rightButton.rightCallBack);
             buttonContainerElement.appendChild(rightBtn);
 
         }
@@ -327,7 +282,7 @@ ol.Map.prototype.addInfoListWindow = function (attrs) {
     }
 
 
-    if (attrs.closeBtn){
+    if (options.closeBtn){
         closeElement.className = "info-window-close";
         winElement.appendChild(closeElement);
     }
@@ -350,7 +305,7 @@ ol.Map.prototype.addInfoListWindow = function (attrs) {
         offset: [0, -10],
         autoPan: true
     });
-    if(attrs.hideBefore){
+    if(options.hideBefore){
         if(that.beforeOverlay){
             that.removeOverlay(that.beforeOverlay);
         }
@@ -359,32 +314,7 @@ ol.Map.prototype.addInfoListWindow = function (attrs) {
     }
     this.addOverlay(overlay);
     that.beforeOverlay = overlay;
-    overlay.setPosition(attrs.position)
+    overlay.setPosition(options.position)
 
     return overlay;
-}
-
-//查询坐标
-function getPosFromMapServer(level, code, map) {// 4地级市 5县 6乡镇
-    var posLoadIndex = layer.msg('查询中...', {icon: 16});
-    var queryUrl = 'http://10.34.0.12:6080/arcgis/rest/services/AHSL_ZH0717/MapServer/' + level + '/query?where=CODE = \'' + code + '\'&text=&objectIds=&time=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=pjson';
-    $.ajax({
-        url: queryUrl,
-        success: function (data) {
-            layer.close(posLoadIndex);
-            if (JSON.parse(data).features[0]) {
-                var x = JSON.parse(data).features[0].geometry.x;
-                var y = JSON.parse(data).features[0].geometry.y;
-                map.getView().setCenter([x,y]);
-                if (level == 5){
-                    map.getView().setZoom(11);
-                } else{
-                    map.getView().setZoom(9);
-                }
-            }
-        },
-        error:function (data) {
-            layer.close(posLoadIndex);
-        }
-    })
 }
