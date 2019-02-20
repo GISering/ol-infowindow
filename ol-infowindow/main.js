@@ -105,7 +105,7 @@ ol.Map.prototype.addInfoWindow = function (attrs) {
         }
 
         rowEle.appendChild(keyEle);
-        rowEle.appendChild(valueEle);
+        rowEle.appendChild(valueEle); 
         rowEle.appendChild(clearEle);
         contentElement.appendChild(rowEle);
     }
@@ -124,15 +124,15 @@ ol.Map.prototype.addInfoWindow = function (attrs) {
         if(attrs.button.leftButton){
             leftBtn.className = "info-window-left info-window-info-button"; //TODO-添加左侧按钮样式
             leftBtn.innerText = attrs.button.leftButton.text;
-            leftBtn.addEventListener('click', attrs.button.leftButton.leftCallBack);
-            buttonContainerElement.appendChild(fullBtn);
+            leftBtn.addEventListener('click', attrs.button.leftButton.callBack);
+            buttonContainerElement.appendChild(leftBtn);
 
         }
 
         if(attrs.button.rightButton){
             rightBtn.className = "info-window-right info-window-info-button"; //TODO-添加右侧按钮样式
             rightBtn.innerText = attrs.button.rightButton.text;
-            rightBtn.addEventListener('click', attrs.button.rightButton.rightCallBack);
+            rightBtn.addEventListener('click', attrs.button.rightButton.callBack);
             buttonContainerElement.appendChild(rightBtn);
 
         }

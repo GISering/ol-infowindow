@@ -14,25 +14,35 @@
             width: 100%;
             height: 100%
         }
+
+        .btn-overlay {
+            width: 40px;
+            height: 40px;
+            border-radius: 32px;
+            background: white;
+            color: #1E9FFF;
+            text-align: center;
+            line-height: 40px;
+            font-size: 0.5em;
+            position: absolute;
+            border: 3px solid #1E9FFF;
+            left: -20px
+        }
     </style>
 </head>
 
 <body>
 
     <div id="map"></div>
-   
+
     <script>
         var center = ol.proj.transform([117.4658331179, 31.6159870346], 'EPSG:4326', 'EPSG:3857');
-        var url = "http://10.34.0.12:6080/arcgis/rest/services/ZTSLDT0717/MapServer";
+        var center1 = ol.proj.transform([117.3065185547, 31.2550741854], 'EPSG:4326', 'EPSG:3857');
+        var center2 = ol.proj.transform([116.5429687500, 31.6954557978], 'EPSG:4326', 'EPSG:3857');
         var osm = new ol.layer.Tile({
             source: new ol.source.OSM()
         });
 
-        var arcgisLayer = new ol.layer.Tile({
-            source: new ol.source.TileArcGISRest({
-                url: url
-            })
-        })
         var map = new ol.Map({
             view: new ol.View({
                 center: center,
@@ -41,99 +51,146 @@
             }),
             target: 'map'
         });
-         var attrs2 = {
-                        title: {
-                            show: true,
-                            text: "你好呀",
-                            textSize: "15px",
-                            textColor: "#000",
-                            backgroundColor: "#ddf1ff",
-                            textAlign: "left"
-                        },
-                        width: "300px",
-                        hideBefore: true,
-                        closeBtn:true,
-                        content: [{
-                            name: "设备编码",
-                            value: "12345644444444444444",
-                            nameColor: "#222222",
-                            valueColor: "#222222",
-                            divider: false
-                        }, {
-                            name: "运行状态",
-                            value: 1=="1"?"运行":"停止",
-                            nameColor: "#222222",
-                            valueColor: 1=="1"?"#00aa00":"#ff0000",
-                            divider: false
-                        },
-                        {
-                            name: "时间",
-                            value: 2019,
-                            nameColor: "#222222",
-                            divider: false
-                        },
-                        {
-                            name: "管理单位",
-                            value: "阜阳水文局",
-                            nameColor: "#222222",
-                            divider: false
-                        },
-                        {
-                            name: "警戒水位",
-                            value: null,
-                            nameColor: "#222222",
-                            divider: false
-                        },
-                        {
-                            name: "流量",
-                            value: 1,
-                            nameColor: "#222222",
-                            divider: false
-                        }],
-                        button: {
-                            show: true,
-                            fullButton: {
-                                text: "播放", fullCallBack: function () {
-                                    alert(1);
-                                }
-                            }
-                        }
-                    };
+        var attrs = {
+            title: {
+                show: true,
+                text: "标题",
+                textSize: "15px",
+                textColor: "#000",
+                backgroundColor: "#ddf1ff",
+                textAlign: "left"
+            },
+            width: "300px",
+            hideBefore: true,
+            closeBtn: true,
+            content: [{
+                    name: "设备编码",
+                    value: "1234564789",
+                    nameColor: "#222222",
+                    valueColor: "#222222",
+                    divider: false
+                }, {
+                    name: "运行状态",
+                    value: 1 == "1" ? "运行" : "停止",
+                    nameColor: "#222222",
+                    valueColor: 1 == "1" ? "#00aa00" : "#ff0000",
+                    divider: false
+                },
+                {
+                    name: "时间",
+                    value: 2019,
+                    nameColor: "#222222",
+                    divider: false
+                },
+                {
+                    name: "管理单位",
+                    value: "某某某公司",
+                    nameColor: "#222222",
+                    divider: false
+                },
+                {
+                    name: "设备温度",
+                    value: 34,
+                    nameColor: "#222222",
+                    divider: false
+                },
+                {
+                    name: "设备厂商",
+                    value: "某某某厂商",
+                    nameColor: "#222222",
+                    divider: false
+                }
+            ],
+            button: {
+                show: true,
+                fullButton: {
+                    text: "播放",
+                    fullCallBack: function () {
+                        alert(1);
+                    }
+                }
+            }
+        };
         map.addLayer(osm);
-        //map.addLayer(arcgisLayer);
 
-        var circle = new ol.Feature({
-            geometry: new ol.geom.Point(center)
-        })
-        circle.setStyle(new ol.style.Style({
-            // image: new ol.style.Icon({
-            //     src:'./images/pos.png',
-            //     size:16
-            // })
-            image: new ol.style.Circle({
-                radius: 10,
-                fill: new ol.style.Fill({
-                    color: 'red'
-                })
-            })
-        }));
-
-        var vectorLayer = new ol.layer.Vector({
-            source: new ol.source.Vector({
-                features: [circle]
-            })
+        //无按钮
+        var noBtnElement = document.createElement('div');
+        noBtnElement.className = "btn-overlay";
+        noBtnElement.innerHTML = "无按钮"
+        var noBtnOverlay = new ol.Overlay({
+            element: noBtnElement,
+            positioning: 'bottom-center',
+            stopEvent: true,
+           
+            autoPan: true,
+            position:center
         });
-        map.addLayer(vectorLayer);
-        var selectSingleClick = new ol.interaction.Select({
-            condition: ol.events.condition.pointerClick
-        });
-        selectSingleClick.on('select', function (event) {
-            var pos = event.mapBrowserEvent.coordinate;
-            attrs2.position = pos;
-            map.addInfoWindow( attrs2)
-        })
-        map.addInteraction(selectSingleClick);
+        noBtnElement.onmousedown = function (ev){
+            attrs.button.show = false;
+            attrs.position = center;
+            map.addInfoWindow(attrs)
+        }
+        map.addOverlay(noBtnOverlay);
 
+        //一个按钮
+        var oneBtnElement = document.createElement('div');
+        oneBtnElement.className = "btn-overlay";
+        oneBtnElement.innerHTML = "单按钮"
+        var oneBtnOverlay = new ol.Overlay({
+            element: oneBtnElement,
+            positioning: 'bottom-center',
+            stopEvent: true,
+            autoPan: true,
+            position:center1
+        });
+        oneBtnElement.onmousedown = function (ev){
+            attrs.position = center1;
+            attrs.button = {
+                show: true,
+                fullButton: {
+                    text: "单按钮",
+                    fullCallBack: function () {
+                        alert(1);
+                    }
+                }
+            }
+            map.addInfoWindow(attrs)
+        }
+        map.addOverlay(oneBtnOverlay);
+
+         //两个按钮
+        var twoBtnElement = document.createElement('div');
+        twoBtnElement.className = "btn-overlay";
+        twoBtnElement.innerHTML = "双按钮"
+        var twoBtnOverlay = new ol.Overlay({
+            element: twoBtnElement,
+            positioning: 'bottom-center',
+            stopEvent: true,
+            autoPan: true,
+            position:center2
+        });
+        twoBtnElement.onmousedown = function (ev){
+            attrs.position = center2;
+            attrs.button = {
+                show: true,
+                leftButton: {
+                    text: "左侧按钮",
+                    callBack: function () {
+                        alert(1);
+                    }
+                },
+                rightButton: {
+                    text: "右侧按钮",
+                    callBack: function () {
+                        alert(1);
+                    }
+                }
+            }
+            map.addInfoWindow(attrs)
+        }
+        map.addOverlay(twoBtnOverlay);
+        
+       
     </script>
 </body>
 
