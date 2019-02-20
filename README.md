@@ -16,6 +16,7 @@
 ![](http://ww1.sinaimg.cn/large/cca5a724ly1g0cwmiaps9g20gg0eq79m.gif)
 
 - 使用 metro.css 样式
+
 ![](http://ww1.sinaimg.cn/large/cca5a724ly1g0cw7apkn1g20gg0eqn36.gif)
 ## 3. 使用方法
 ### 安装使用
