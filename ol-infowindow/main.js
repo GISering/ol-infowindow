@@ -117,7 +117,7 @@ ol.Map.prototype.addInfoWindow = function (attrs) {
         if(attrs.button.fullButton){
             fullBtn.className = "info-window-full info-window-info-button"  //TODO-添加一个按钮样式
             fullBtn.innerText = attrs.button.fullButton.text;
-            fullBtn.addEventListener('click', attrs.button.fullButton.fullCallBack);
+            fullBtn.addEventListener('click', attrs.button.fullButton.callBack);
             buttonContainerElement.appendChild(fullBtn);
         }
 
